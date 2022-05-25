@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     static int GermanArmyIntents;
     static int PolishArmyIntents;
     static int HireForYou = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void MainStream() {
         new Thread(new Runnable() {
             @Override
@@ -199,35 +197,30 @@ public class MainActivity extends AppCompatActivity {
                                         GermanCapitalInt = GermanCapitalInt + GermanIncome;
                                         GermanCapitalString.setText(String.valueOf(GermanCapitalInt));
                                     }
+                                    EnemyArmyIntents();
                                     AntiChit = 0;
                                 }
                             });
                         }
-
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-
-
             }
         }).start();
     }
-
     public static void GetPowerForGermany() {
         GermanIncome = (int) ((Math.random() * (GermanIncomeMaximum - GermanIncomeMinimum)) + 1);
         GermanCapitalInt = GermanCapitalInt + GermanIncome;
         GermanCapitalString.setText(String.valueOf(GermanCapitalInt));
         AntiChit = AntiChit + 1;
     }
-
     public static void GetPowerForPoland() {
         PolishIncome = (int) ((Math.random() * (PolishIncomeMaximum - PolishIncomeMinimum)) + 1);
         PolishCapitalInt = PolishCapitalInt + PolishIncome;
         PolishCapitalString.setText(String.valueOf(PolishCapitalInt));
         AntiChit = AntiChit + 1;
     }
-
     public static void AttackForGermany() {
         if (PolishCapitalInt > 0) {
             if (PolishCapitalInt > 0 && GermanCapitalInt > 0) {
@@ -247,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
             GermanCapitalString.setText(String.valueOf(GermanCapitalInt));
         }
     }
-
     public static void AttackForPoland() {
         if (GermanCapitalInt > 0) {
             if (PolishCapitalInt > 0 && GermanCapitalInt > 0) {
@@ -267,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
             PolishCapitalString.setText(String.valueOf(PolishCapitalInt));
         }
     }
-
     public static void HireMinisterForGermany() {
         if (GermanCapitalInt >= 10) {
             GermanCapitalInt = GermanCapitalInt - 10;
@@ -276,7 +267,6 @@ public class MainActivity extends AppCompatActivity {
             MinisterButton.setText(String.valueOf(GermanMinisterIncome) + " кликов в секунду");
         }
     }
-
     public static void HireMinisterForPoland() {
         if (PolishCapitalInt >= 10) {
             PolishCapitalInt = PolishCapitalInt - 10;
@@ -285,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
             MinisterButton.setText(String.valueOf(PolishMinisterIncome) + " кликов в секунду");
         }
     }
-
     public static void BuildPromForGermany() {
         if (GermanCapitalInt >= 20) {
             GermanCapitalInt = GermanCapitalInt - 20;
@@ -294,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
             PromButton.setText("1 -" + String.valueOf(GermanIncomeMaximum - 1) + " мешков с золотом за клик");
         }
     }
-
     public static void BuildPromForPoland() {
         if (PolishCapitalInt >= 20) {
             PolishCapitalInt = PolishCapitalInt - 20;
@@ -303,109 +291,177 @@ public class MainActivity extends AppCompatActivity {
             PromButton.setText("1 -" + String.valueOf(PolishIncomeMaximum - 1) + " мешков с золотом за клик");
         }
     }
-
     public static void HireInfantry() {
-        if (OurCountry == 0) {
-            if (GermanCapitalInt >= 10) {
-                GermanCapitalInt = GermanCapitalInt - 10;
-                GermanInfantryInt = GermanInfantryInt + 1;
-                GermanInfantryString.setText(String.valueOf(GermanInfantryInt));
+        if (HireForYou == 0) {
+            if (OurCountry == 1) {
+                if (GermanCapitalInt >= 10) {
+                    GermanCapitalInt = GermanCapitalInt - 10;
+                    GermanInfantryInt = GermanInfantryInt + 1;
+                    GermanInfantryString.setText(String.valueOf(GermanInfantryInt));
+                }
+            } else if (OurCountry == 0) {
+                if (PolishCapitalInt >= 10) {
+                    PolishCapitalInt = PolishCapitalInt - 10;
+                    PolishInfantryInt = PolishInfantryInt + 1;
+                    PolishInfantryString.setText(String.valueOf(PolishInfantryInt));
+                }
             }
-        } else if (OurCountry == 1) {
-            if (PolishCapitalInt >= 10) {
-                PolishCapitalInt = PolishCapitalInt - 10;
-                PolishInfantryInt = PolishInfantryInt + 1;
-                PolishInfantryString.setText(String.valueOf(PolishInfantryInt));
+        } else if (HireForYou == 1) {
+            if (OurCountry == 0) {
+                if (GermanCapitalInt >= 10) {
+                    GermanCapitalInt = GermanCapitalInt - 10;
+                    GermanInfantryInt = GermanInfantryInt + 1;
+                    GermanInfantryString.setText(String.valueOf(GermanInfantryInt));
+                }
+            } else if (OurCountry == 1) {
+                if (PolishCapitalInt >= 10) {
+                    PolishCapitalInt = PolishCapitalInt - 10;
+                    PolishInfantryInt = PolishInfantryInt + 1;
+                    PolishInfantryString.setText(String.valueOf(PolishInfantryInt));
+                }
             }
         }
     }
-
     public static void HireCavalry() {
-        if (OurCountry == 0) {
-            if (GermanCapitalInt >= 20) {
-                GermanCapitalInt = GermanCapitalInt - 20;
-                GermanCavalryInt = GermanCavalryInt + 1;
-                GermanCavalryString.setText(String.valueOf(GermanCavalryInt));
+        if (HireForYou == 0) {
+            if (OurCountry == 1) {
+                if (GermanCapitalInt >= 20) {
+                    GermanCapitalInt = GermanCapitalInt - 20;
+                    GermanCavalryInt = GermanCavalryInt + 1;
+                    GermanCavalryString.setText(String.valueOf(GermanCavalryInt));
+                }
+            } else if (OurCountry == 0) {
+                if (PolishCapitalInt >= 20) {
+                    PolishCapitalInt = PolishCapitalInt - 20;
+                    PolishCavalryInt = PolishCavalryInt + 1;
+                    PolishCavalryString.setText(String.valueOf(PolishCavalryInt));
+                }
             }
-        } else if (OurCountry == 1) {
-            if (PolishCapitalInt >= 20) {
-                PolishCapitalInt = PolishCapitalInt - 20;
-                PolishCavalryInt = PolishCavalryInt + 1;
-                PolishCavalryString.setText(String.valueOf(PolishCavalryInt));
+        }else  if (HireForYou == 1) {
+            if (OurCountry == 0) {
+                if (GermanCapitalInt >= 20) {
+                    GermanCapitalInt = GermanCapitalInt - 20;
+                    GermanCavalryInt = GermanCavalryInt + 1;
+                    GermanCavalryString.setText(String.valueOf(GermanCavalryInt));
+                }
+            } else if (OurCountry == 1) {
+                if (PolishCapitalInt >= 20) {
+                    PolishCapitalInt = PolishCapitalInt - 20;
+                    PolishCavalryInt = PolishCavalryInt + 1;
+                    PolishCavalryString.setText(String.valueOf(PolishCavalryInt));
+                }
             }
         }
     }
-
     public static void HireArchers() {
-        if (OurCountry == 0) {
-            if (GermanCapitalInt >= 25) {
-                GermanCapitalInt = GermanCapitalInt - 25;
-                GermanArchersInt = GermanArchersInt + 1;
-                GermanArchersString.setText(String.valueOf(GermanArchersInt));
+        if (HireForYou == 0) {
+            if (OurCountry == 1) {
+                if (GermanCapitalInt >= 25) {
+                    GermanCapitalInt = GermanCapitalInt - 25;
+                    GermanArchersInt = GermanArchersInt + 1;
+                    GermanArchersString.setText(String.valueOf(GermanArchersInt));
+                }
+            } else if (OurCountry == 0) {
+                if (PolishCapitalInt >= 25) {
+                    PolishCapitalInt = PolishCapitalInt - 25;
+                    PolishArchersInt = PolishArchersInt + 1;
+                    PolishArchersString.setText(String.valueOf(PolishArchersInt));
+                }
             }
-        } else if (OurCountry == 1) {
-            if (PolishCapitalInt >= 25) {
-                PolishCapitalInt = PolishCapitalInt - 25;
-                PolishArchersInt = PolishArchersInt + 1;
-                PolishArchersString.setText(String.valueOf(PolishArchersInt));
+        }else if (HireForYou == 1) {
+            if (OurCountry == 0) {
+                if (GermanCapitalInt >= 25) {
+                    GermanCapitalInt = GermanCapitalInt - 25;
+                    GermanArchersInt = GermanArchersInt + 1;
+                    GermanArchersString.setText(String.valueOf(GermanArchersInt));
+                }
+            } else if (OurCountry == 1) {
+                if (PolishCapitalInt >= 25) {
+                    PolishCapitalInt = PolishCapitalInt - 25;
+                    PolishArchersInt = PolishArchersInt + 1;
+                    PolishArchersString.setText(String.valueOf(PolishArchersInt));
+                }
             }
         }
     }
-
     public static void EnemyArmyIntents() {
-        if (OurCountry == 1) {
-            if (10 <= GermanCapitalInt && GermanCapitalInt < 20) {
+        if (OurCountry == 0) {
+            if (10 < GermanCapitalInt && GermanCapitalInt < 20) {
                 GermanArmyIntents = (int) Math.random();
                 if (GermanArmyIntents > 0.5) {
+                    HireForYou = 1;
                     HireInfantry();
+                    HireForYou = 0;
                 }
             }
-            if (20 <= GermanCapitalInt && GermanCapitalInt < 25) {
+            else if (20 < GermanCapitalInt && GermanCapitalInt < 25) {
                 GermanArmyIntents = (int) Math.random();
                 if (GermanArmyIntents < 0.3) {
+                    HireForYou = 1;
                     HireInfantry();
+                    HireForYou = 0;
                 }
                 else if (GermanArmyIntents > 0.3 && GermanArmyIntents <= 0.7) {
+                    HireForYou = 1;
                     HireCavalry();
+                    HireForYou = 0;
                 }
             }
-            if (GermanCapitalInt <= 25) {
+            else if (GermanCapitalInt < 25) {
                 if (GermanArmyIntents < 0.25) {
+                    HireForYou = 1;
                     HireInfantry();
+                    HireForYou = 0;
                 }
                 else if (GermanArmyIntents >= 0.25 && GermanArmyIntents <= 0.5) {
+                    HireForYou = 1;
                     HireCavalry();
+                    HireForYou = 0;
                 }
                 else if (GermanArmyIntents > 0.5 && GermanArmyIntents >= 0.75) {
-
+                    HireForYou = 1;
+                    HireArchers();
+                    HireForYou = 0;
                 }
             }
         }
-        else if (OurCountry == 0) {
-            if (10 <= PolishCapitalInt && PolishCapitalInt < 20) {
+        else if (OurCountry == 1) {
+            if (10 < PolishCapitalInt && PolishCapitalInt < 20) {
                 PolishArmyIntents = (int) Math.random();
                 if (PolishArmyIntents > 0.5) {
-                    HireInfantry();
+                    HireForYou = 0;
+                    HireCavalry();
+                    HireForYou = 1;
                 }
             }
-            if (20 <= PolishCapitalInt && PolishCapitalInt < 25) {
+            else if (20 < PolishCapitalInt && PolishCapitalInt < 25) {
                 PolishArmyIntents = (int) Math.random();
                 if (PolishArmyIntents < 0.3) {
+                    HireForYou = 0;
                     HireInfantry();
+                    HireForYou = 1;
                 }
                 else if (PolishArmyIntents > 0.3 && PolishArmyIntents <= 0.7) {
+                    HireForYou = 0;
                     HireCavalry();
+                    HireForYou = 1;
                 }
             }
-            if (PolishCapitalInt <= 25) {
+            else if (PolishCapitalInt < 25) {
                 if (PolishArmyIntents < 0.25) {
+                    HireForYou = 0;
                     HireInfantry();
+                    HireForYou = 1;
                 }
                 else if (PolishArmyIntents >= 0.25 && PolishArmyIntents <= 0.5) {
+                    HireForYou = 0;
                     HireCavalry();
+                    HireForYou =1;
                 }
                 else if (PolishArmyIntents > 0.5 && PolishArmyIntents >= 0.75) {
-
+                    HireForYou = 0;
+                    HireArchers();
+                    HireForYou = 1;
                 }
             }
         }
